@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>overlay demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="https://a.alipayobjects.com/amui/base/1.0.1/amui-https.css">
+    <script src="http://cdn.staticfile.org/zepto/1.0rc1/zepto.min.js"></script>
+    <script src="../src/overlay.js"></script>
+
+</head>
+<body style="height: 1500px">
+<button id="test1">m.overlay.show()</button>
+
+<script>
+    $("#test1").click(function (e) {
+        e.preventDefault();
+        m.overlay.show();
+    });
+</script>
+</body>
+</html>

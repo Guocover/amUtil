@@ -1,0 +1,27 @@
+{
+  "family": "amj",
+  "name": "amj",
+  "version": "1.0.0",
+  "description": "alipay mobile js widget",
+  "homepage": "",
+  "author": "semious",
+  "maintainers": [
+    "semious"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://gitlab.alibaba-inc.com/alipay-mobile-framework/amj.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "output": [
+    ],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}

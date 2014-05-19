@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AMJ Dialog</title>
+    <link rel="stylesheet" href="http://ux.alipay-inc.com/www/amui/dist/amui.css">
+    <script src="http://cdn.staticfile.org/zepto/1.0rc1/zepto.min.js"></script>
+    <script src="../src/_dialog.js"></script>
+    <script src="../src/utils.js"></script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <style>
+    </style>
+</head>
+<body>
+<button id="test1">Alert("aa")</button>
+<button id="test2">Alert("title","aa")</button>
+<button id="test3">Alert("title2","bb",cb)</button>
+<button id="test4">Alert("bb",cb)</button>
+<input type="text" name="" id="test5">
+<input type="password" name="" id="test7">
+<input type="radio" name="" id="test8">
+<input type="checkbox" name="" id="test9">
+<textarea name="" id="test6"></textarea>
+<input type="hidden" name="" id="test10">
+<select name="sel" id="sel">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+</select>
+    <script>
+        $("#test1").click(function (e) {
+            e.preventDefault();
+            window.AMJ.Dialog.alert("aa");
+        });
+
+        $("#test2").click(function (e) {
+            window.AMJ.Dialog.alert("title", "aa");
+        });
+
+        $("#test3").click(function (e) {
+            window.AMJ.Dialog.info("title2", "bb", function (e) {
+                $("#test3").text("bb's callback");
+            });
+        });
+
+        $("#test4").click(function (e) {
+            window.AMJ.Dialog.confirm("cc", function (e) {
+                $("#test4").text("cc's callback");
+            })
+        });
+
+        $("#test5,#test6,#test7,#test8,#test9").focus(function () {
+            // 
+            // 
+            // $(this).blur();
+            window.AMJ.Dialog.alert($(this).attr('id'));
+        })
+    </script>
+</body>
+</html>
