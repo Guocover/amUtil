@@ -4,4 +4,4 @@
 
 ## 1.0.0
 
-`new` amj/amj First version.
+`new` amj/* First version.

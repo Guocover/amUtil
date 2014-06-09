@@ -21,10 +21,10 @@
      * image转换base64编码方法
      *
      * @memberof AJ.image2base64
-     * @param {!path} src - 图片地址（需要同域,项目目录）
-     * @param {?callback} data - 返回数据
+     * @param {!path} path - 图片地址（需要同域,项目目录）
+     * @param {!function} callback - 返回数据
      *
-     * @returns {String}
+     * @returns {string}
      *
      * @desc image转换base64编码方法
      *
