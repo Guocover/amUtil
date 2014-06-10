@@ -1,6 +1,6 @@
 /**
  *
- * storage 本地存储对象
+ * storage 本地存储
  * @memberof AJ
  * @author 轩与
  * @version 1.0.0
@@ -9,58 +9,73 @@ var storage = {},
 	ls ,
 	isStorable = true;
 
-try {
-	"localStorage" in window ? (ls = window.localStorage) : (isStorable = false);
-} catch (e) {
-	console.info(e);
-	isStorable = false;
+/**
+ *
+ * storage模块初始化
+ *
+ * */
+function init() {
+	try {
+		"localStorage" in window ? (ls = window.localStorage) : (isStorable = false);
+	} catch (e) {
+		console.info(e);
+		isStorable = false;
+	}
 }
 
+init();
+
 var methods = {
+	/**
+	 *
+	 * 获取储存内容
+	 * @param {string} key 存储内容的key值
+	 * @returns {*} 返回值为undefined意味着没找到该储存内容
+	 *
+	 * @example
+	 * var content = AJ.storage.get("name");
+	 *
+	 * */
 	get: function (key) {
 		var val = ls.getItem(key);
 		//有些浏览器会返回null值，一律做undefined处理
-		if (val === undefined || val === null) {
-			return getValueByExpire(key, val);
-		} else {
-			return undefined;
-		}
+		return val === undefined || val === null ? undefined : getValueByExpire(key, val);
 	},
+	/**
+	 * 设置储存内容
+	 * @param {string} key 存储的key值，区分大小写
+	 * @param {*} val 设置的存储数值 传入 undefined或者null 则认为是删除
+	 * @param {?number|date} expire 过期时间,如果是date类型，则是过期日期，如果是number则是过几秒后过期 单位：秒
+	 *
+	 * */
 	set: function (key, val, expire) {
 		this.remove(key);
 
 		//val 为"undefined"或"null"字符串时，等同于删除
 		if (val === undefined || val === null) return;
 
+		expire && (val = addExpire(val, expire));
+
 		//除函数之外的所有参数全部stringify之后再保存
 		if (Object.prototype.toString.apply(val) !== '[object Function]') val = JSON.stringify(val);
 
-		val = addExpire(val, expire);
-
 		setValue(key, val);
 	},
+	/**
+	 * 删除存储值
+	 * @param {string} key 储存的键值
+	 *
+	 * */
 	remove: function (key) {
 		ls.removeItem(key);
 	},
+	/**
+	 * 清空所有键值
+	 *
+	 * */
 	clear: function () {
 		ls.clear();
-	},
-	isFull: function () {
-		var testValue = " ";
-		try {
-			ls["amTestCode"] = testValue;
-			return false;
-		} catch (e) {
-			if (e.code === 22) {
-				return true;
-			} else {
-				return undefined;
-			}
-		} finally {
-			this.remove("amTestCode");
-		}
-	},
-	length: ls.length
+	}
 };
 
 addMethod(methods);
@@ -92,7 +107,7 @@ function getValueByExpire(key, storageValue) {
 	try {
 		var val = JSON.parse(storageValue);
 		if (val.amStorageExpire) {
-			if ((+new Date() - val.amStorageExpire ) > 0) {
+			if ((+new Date() - Date.parse(val.amStorageExpire)) > 0) {
 				ls.removeItem(key);
 				return undefined;
 			} else {
@@ -115,26 +130,40 @@ function getValueByExpire(key, storageValue) {
  *
  * */
 function setValue(key, val) {
-	val === undefined ? ls.setItem(key, val) : ls.remove(key);
+	try {
+		val !== undefined && val !== null ? ls.setItem(key, val) : ls.remove(key);
+	} catch (e) {
+		if (e.code == 22) {
+			console.log("storage已满，无法在储存新的数据");
+		} else {
+			console.error(e);
+		}
+	}
 }
 
 /**
  *
  * 在val里增加expire过期时间
  * @param {*} val 用户设置的val数值
- * @param {number} expire 过期时间 单位：秒
+ * @param {number|date} expire 过期时间 单位：秒
  * @returns {*}
  *
  * */
 function addExpire(val, expire) {
 	if (expire !== undefined) {
 		try {
-			if (isNaN(expire)) {
+			if (Object.prototype.toString.apply(expire) === '[object Date]') {
+				var newVal = {
+					amStorageExpire: expire,
+					amStorageValue: val
+				};
+				return newVal;
+			} else if (isNaN(expire)) {
 				return val;
 			} else {
 				var time = Number(expire).toFixed();
 				var newVal = {
-					amStorageExpire: (+new Date()) + time,
+					amStorageExpire: new Date((+new Date()) + time * 1000),
 					amStorageValue: val
 				};
 				return newVal;
@@ -147,5 +176,6 @@ function addExpire(val, expire) {
 		return val;
 	}
 }
+
 
 module.exports = storage;

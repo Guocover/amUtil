@@ -64,7 +64,24 @@
 		//将module.exports替换成全局变量
 		var modName = modSrc.substr(modSrc.lastIndexOf("/") + 1, modSrc.length).replace(".js", "");
 		modSrcCode = modSrcCode.replace("module.exports", "window." + MOD_NAMESAPCE + "." + modName);
-		eval(moduleWrapper.replace("$$modSrc", modSrcCode));
+		postModToServer(modName + ".windows", moduleWrapper.replace("$$modSrc", modSrcCode));
+//		eval(moduleWrapper.replace("$$modSrc", modSrcCode));
+		document.write("<script type='text/javascript' src='" + "http://ux.alipay-inc.com/lib/getMod.php?modName=" + modName + ".windows" + "'></script>");
+	}
+
+	/**
+	 *
+	 * 将mod内容提交到服务器保存
+	 * @param {string} modName 模块名称
+	 * @param {string} modContent 模块js源代码
+	 *
+	 * */
+	function postModToServer(modName, modContent) {
+		var url = "http://ux.alipay-inc.com/lib/setMod.php";
+		var XMLHttpReq = new XMLHttpRequest();
+		XMLHttpReq.open("POST", url, false);
+		XMLHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		XMLHttpReq.send("modName=" + modName + "&modContent=" + encodeURIComponent(modContent));
 	}
 
 	main();
