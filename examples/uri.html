@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>uri demo示例</title>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" type="text/css" href="https://a.alipayobjects.com/amui/base/1.0.1/amui-https.css"
+          media="all">
+    <script src="http://libs.baidu.com/zepto/0.8/zepto.min.js"></script>
+    <script src="AJMod.js?../src/uri.js"></script>
+    <style>
+        body {
+            margin: 15px;
+        }
+
+        .unit {
+            margin: 15px 0;
+        }
+
+    </style>
+</head>
+<body>
+<h3>uri</h3>
+
+<div id="tests"></div>
+
+<script type="text/javascript">
+    var testUnits = [
+        {
+            name: "解析当前的url地址",
+            command: function () {
+                console.log(AJ.uri.parse(location.href));
+            }
+        },
+        {
+            name: "用stringify方法将uri转换成string",
+            command: function () {
+                console.log(AJ.uri.stringify(AJ.uri.parse(location.href)));
+            }
+        },
+        {
+            name: "用toString的方法将uri转换成string",
+            command: function () {
+                var date = new Date((+new Date()) + 3000);
+                console.log(AJ.uri.parse(location.href).toString());
+            }
+        },
+        {
+            name: "当前地址增加a=b的参数",
+            command: function () {
+                console.log(AJ.uri.setQueryString(location.href,"a","中文b"));
+            }
+        },
+        {
+            name: "获取a的参数",
+            command: function () {
+                console.log(AJ.uri.getQueryString(location.href,"a"));
+            }
+        },
+    ];
+
+    function createUnitLayout() {
+        var htmlTpl = "";
+        testUnits.forEach(function (unit, index) {
+            htmlTpl = "<div class='unit'><button onclick='(" + testUnits[index].command + ")();'>" + unit.name + "</button></div>";
+            $("#tests").append(htmlTpl);
+        });
+
+    }
+
+    createUnitLayout();
+</script>
+</body>
+</html>
