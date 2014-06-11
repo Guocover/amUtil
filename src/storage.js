@@ -177,5 +177,4 @@ function addExpire(val, expire) {
 	}
 }
 
-
 module.exports = storage;

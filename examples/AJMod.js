@@ -65,9 +65,12 @@
 		var modName = modSrc.substr(modSrc.lastIndexOf("/") + 1, modSrc.length).replace(".js", "");
 		modSrcCode = modSrcCode.replace("module.exports", "window." + MOD_NAMESAPCE + "." + modName);
 		var windowModuleCode = moduleWrapper.replace("$$modSrc", modSrcCode);
-//		eval(moduleWrapper.replace("$$modSrc", modSrcCode));
-//		postModToServer(modName + ".windows", moduleWrapper.replace("$$modSrc", modSrcCode));
-		document.write("<script type='text/javascript'>" + windowModuleCode + "</script>");
+
+		postModToServer(modName + ".windows", windowModuleCode);
+		document.write("<script type='text/javascript' src='" + "http://ux.alipay-inc.com/lib/getMod.php?modName=" + modName + ".windows" + "'></script>");
+
+//		document.write("<script type='text/javascript'>" + windowModuleCode + "</script>");
+
 	}
 
 	/**
