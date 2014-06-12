@@ -17,6 +17,7 @@ var uri = {
 		if (isObj(url))return url;
 		var a = document.createElement('a');
 		a.href = url;
+		//todo 在对象里增加特殊标志已判断是否是自己的对象
 		var uriObj = {
 			source: url,
 			protocol: a.protocol.replace(':', ''),
@@ -67,9 +68,9 @@ var uri = {
 	 * @param {?string} value queryString的值，如果不传，或者传undefined|null 都认为是删除
 	 *
 	 * @returns {string|object} 如果传入的参数是string，则返回string，否则返回uri对象
-	 *
+	 * //todo 增加传对象的批量增加,removeParam 的api
 	 * */
-	setQueryString: function (url, key, value) {
+	setParam: function (url, key, value) {
 		var uri = this.parse(url);
 
 		if (value === undefined || value === null) {
@@ -93,7 +94,7 @@ var uri = {
 	 * @returns {string|undefined} 如果未找到，则返回undefined
 	 *
 	 * */
-	getQueryString: function (url, name) {
+	getParam: function (url, name) {
 		var uri = this.parse(url);
 		return uri.params[name];
 	}

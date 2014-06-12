@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://a.alipayobjects.com/amui/base/1.0.1/amui-https.css"
           media="all">
     <script src="http://libs.baidu.com/zepto/0.8/zepto.min.js"></script>
+    //todo 参考combo连接符号
     <script src="AJMod.js?../src/storage.js"></script>
     <style>
         body {
@@ -44,17 +45,17 @@
             }
         },
         {
-            name: "设置过期缓存 绝对时间 key1 value1 当前时间后三秒的date对象",
+            name: "设置过期缓存 绝对时间 key1 对象 当前时间后三秒的date对象",
             command: function () {
                 var date = new Date((+new Date()) + 3000);
                 AJ.storage.set("key1", {a: "2a", b: true, c: 34, d: [1, 2, "a"]}, date);
             }
         },
         {
-            name: "设置过期缓存 相对时间 key1 value1 当起时间后三秒的时间戳",
+            name: "设置过期缓存 相对时间 key2 value1 当起时间后三秒的时间戳",
             command: function () {
                 var date = 3;
-                AJ.storage.set("key1", "value1", date);
+                AJ.storage.set("key2", "value1", date);
             }
         },
         {
@@ -64,21 +65,21 @@
             }
         },
         {
+            name: "读取key2缓存",
+            command: function () {
+                console.log(AJ.storage.get("key2"));
+            }
+        },
+        {
             name: "清除key1缓存,通过remove方法",
             command: function () {
                 AJ.storage.remove("key1");
             }
         },
         {
-            name: "清除key1缓存,通过传入undefined类型",
+            name: "查询key1的过期日期",
             command: function () {
-                AJ.storage.set("key1", undefined);
-            }
-        },
-        {
-            name: "清除key1缓存,通过传入null类型",
-            command: function () {
-                AJ.storage.set("key1", null);
+                console.log(AJ.storage.getExpiredDate("key1"));
             }
         },
         {

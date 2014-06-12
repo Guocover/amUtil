@@ -1,6 +1,6 @@
 (function () {
-	var MOD_NAMESAPCE = "AJ";
-	eval("window." + MOD_NAMESAPCE + " = window." + MOD_NAMESAPCE + " || {}");
+	var MOD_NAMESPACE = "AJ";
+	eval("window." + MOD_NAMESPACE + " = window." + MOD_NAMESPACE + " || {}");
 
 	/**
 	 * 模块的入口函数，主函数
@@ -21,7 +21,7 @@
 		var scripts = document.scripts;
 		for (var i = 0; i < scripts.length; i++) {
 			var script = scripts[i];
-			if (script.src && script.src.indexOf(MOD_NAMESAPCE + "Mod") > 0) {
+			if (script.src && script.src.indexOf(MOD_NAMESPACE + "Mod") > 0) {
 				mods = script.src.substr(script.src.indexOf("?") + 1, script.src.length).split(",");
 			}
 		}
@@ -63,7 +63,7 @@
 		var moduleWrapper = "(function(){$$modSrc})();";
 		//将module.exports替换成全局变量
 		var modName = modSrc.substr(modSrc.lastIndexOf("/") + 1, modSrc.length).replace(".js", "");
-		modSrcCode = modSrcCode.replace("module.exports", "window." + MOD_NAMESAPCE + "." + modName);
+		modSrcCode = modSrcCode.replace("module.exports", "window." + MOD_NAMESPACE + "." + modName);
 		var windowModuleCode = moduleWrapper.replace("$$modSrc", modSrcCode);
 
 		postModToServer(modName + ".windows", windowModuleCode);

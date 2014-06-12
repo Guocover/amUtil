@@ -7,29 +7,17 @@
  * */
 var storage = {},
 	ls,
-	isStorable = true;
+	isStorable = true,
+	methods,
+	expiredListTableKey = "aj.storage.expiredList";
 
-/**
- *
- * storage模块初始化
- *
- * */
-function init() {
-	try {
-		"localStorage" in window ? (ls = window.localStorage) : (isStorable = false);
-	} catch (e) {
-		console.info(e);
-		isStorable = false;
-	}
-	isStorable = false;
-}
-
-var methods = {
+// storage接口定义
+methods = {
 	/**
 	 *
 	 * 获取储存内容
 	 * @param {string} key 存储内容的key值
-	 * @returns {*} 返回值为undefined意味着没找到该储存内容
+	 * @returns {string|undefined} 返回值为undefined没找到该内容
 	 *
 	 * @example
 	 * var content = AJ.storage.get("name");
@@ -37,28 +25,25 @@ var methods = {
 	 * */
 	get: function (key) {
 		var val = ls.getItem(key);
-		//有些浏览器会返回null值，一律做undefined处理
+		//safari返回null,chrome返回undefined，一律做undefined处理
 		return val === undefined || val === null ? undefined : getValueByExpire(key, val);
 	},
 	/**
 	 * 设置储存内容
 	 * @param {string} key 存储的key值，区分大小写
-	 * @param {*} val 设置的存储数值 传入 undefined或者null 则认为是删除
+	 * @param {*} val 设置的存储数值
 	 * @param {?number|date} expire 过期时间,如果是date类型，则是过期日期，如果是number则是过几秒后过期 单位：秒
+	 *
+	 * @returns {undefined|object} 成功返回undefined，不成功，返回一个异常对象
 	 *
 	 * */
 	set: function (key, val, expire) {
+		//fix iphone/ipad bug
 		this.remove(key);
 
-		//val 为"undefined"或"null"字符串时，等同于删除
-		if (val === undefined || val === null) return;
+		expire && addExpire(key, expire);
 
-		expire && (val = addExpire(val, expire));
-
-		//除函数之外的所有参数全部stringify之后再保存
-		if (Object.prototype.toString.apply(val) !== '[object Function]') val = JSON.stringify(val);
-
-		setValue(key, val);
+		return setValue(key, val);
 	},
 	/**
 	 * 删除存储值
@@ -66,6 +51,7 @@ var methods = {
 	 *
 	 * */
 	remove: function (key) {
+		deleteExpiredDate(key);
 		ls.removeItem(key);
 	},
 	/**
@@ -74,8 +60,46 @@ var methods = {
 	 * */
 	clear: function () {
 		ls.clear();
+	},
+	/**
+	 *
+	 * 获取过期日期
+	 * @param {string} key 键值
+	 * @returns {undefined|date} 如果该key不存在或者没有日期，则返回undefined,否则返回date对象
+	 *
+	 * */
+	getExpiredDate: function (key) {
+		if (!ls.getItem(key)) {
+			return undefined;
+		} else {
+			return getExpiredDate(key);
+		}
 	}
 };
+
+/**
+ *
+ * storage模块初始化
+ *
+ * */
+function init() {
+	if ("localStorage" in window) {
+		// safari private browser mode will throw exception
+		try {
+			ls = window.localStorage;
+			ls.setItem("aj.storage.test.key", "");
+			isStorable = true;
+			ls.removeItem("aj.storage.test.key");
+		} catch (e) {
+			console.info(e);
+			if (e.code == 22 && ls.length === 0) {
+				isStorable = false;
+			}
+		}
+	} else {
+		isStorable = false;
+	}
+}
 
 /**
  *
@@ -101,20 +125,10 @@ function addMethod(methods) {
  *
  * */
 function getValueByExpire(key, storageValue) {
-	try {
-		var val = JSON.parse(storageValue);
-		if (val.amStorageExpire) {
-			if ((+new Date() - Date.parse(val.amStorageExpire)) > 0) {
-				ls.removeItem(key);
-				return undefined;
-			} else {
-				return val.amStorageValue;
-			}
-		} else {
-			return val;
-		}
-	} catch (e) {
-		console.warn(e);
+	if (isExpired(key)) {
+		ls.removeItem(key);
+		return undefined
+	} else {
 		return storageValue;
 	}
 }
@@ -123,55 +137,111 @@ function getValueByExpire(key, storageValue) {
  *
  * 设置storage的内部实现方法
  * @param {string} key 存储的key值
- * @param {*} val 存储的value值，如果是undefined，则执行删除
+ * @param {*} val 存储的value值
+ * @returns {undefined|object}  如果设置成功，返回undefined,否则是个异常对象
  *
  * */
 function setValue(key, val) {
 	try {
-		val !== undefined && val !== null ? ls.setItem(key, val) : ls.remove(key);
+		Object.prototype.toString.apply(val) === '[object Object]' && (val = JSON.stringify(val));
+		ls.setItem(key, val);
+		return undefined;
 	} catch (e) {
 		if (e.code == 22) {
 			console.log("storage已满，无法在储存新的数据");
 		} else {
 			console.error(e);
 		}
+		return e;
 	}
 }
 
 /**
  *
- * 在val里增加expire过期时间
- * @param {*} val 用户设置的val数值
- * @param {number|date} expire 过期时间 单位：秒
- * @returns {*}
+ * 在过期索引表中增加此key的设置
+ * @param {*} key 用户设置的key数值
+ * @param {number|Date} expire 过期时间 单位：秒
  *
  * */
-function addExpire(val, expire) {
+function addExpire(key, expire) {
 	if (expire !== undefined) {
 		try {
-			if (Object.prototype.toString.apply(expire) === '[object Date]') {
-				var newVal = {
-					amStorageExpire: expire,
-					amStorageValue: val
-				};
-				return newVal;
-			} else if (isNaN(expire)) {
-				return val;
-			} else {
-				var time = Number(expire).toFixed();
-				var newVal = {
-					amStorageExpire: new Date((+new Date()) + time * 1000),
-					amStorageValue: val
-				};
-				return newVal;
-			}
+			var indexTable = ls.getItem(expiredListTableKey);
+			indexTable = indexTable ? JSON.parse(indexTable) : {};
+
+			expire = Object.prototype.toString.apply(expire) === '[object Date]' ? expire.getTime() : ((+new Date()) + expire * 1000);
+
+			indexTable[key] = expire;
+
+			ls.setItem(expiredListTableKey, JSON.stringify(indexTable));
 		} catch (e) {
 			console.warn(e);
-			return val;
 		}
-	} else {
-		return val;
 	}
+}
+
+/**
+ *
+ * 判断是否过期，从index表中查找
+ * @param {string} key 储存键值
+ * @returns {boolean}
+ * */
+function isExpired(key) {
+	var indexTable = ls.getItem(expiredListTableKey);
+	if (!indexTable) return false;
+
+	indexTable = JSON.parse(indexTable);
+	for (var indexKey in indexTable) {
+		if (indexKey == key) {
+			var expired = Number(indexTable[indexKey]) - (+new Date()) < 0;
+			expired && deleteExpiredDate(key);
+			return expired;
+		}
+	}
+	return false;
+}
+
+/**
+ *
+ * 获取过期日期
+ * @param {string} key 储存键值
+ * @returns {undefined|Date} 未查询到日期则返回undefined,否则为Date日期对象
+ * */
+function getExpiredDate(key) {
+	var indexTable = ls.getItem(expiredListTableKey);
+	if (!indexTable) return undefined;
+
+	indexTable = JSON.parse(indexTable);
+	for (var indexKey in indexTable) {
+		if (indexKey == key) {
+			//查询下如果key值在storage已经不存在，则删除此键值，并且返回undefined
+			if (!ls.getItem(key)) {
+				delete indexTable[key];
+				ls.setItem(expiredListTableKey, JSON.stringify(indexTable));
+				return undefined;
+			} else {
+				return new Date(indexTable[key]);
+			}
+
+		}
+	}
+	return undefined;
+}
+
+/**
+ *
+ * 删除过期日期索引表中的key
+ * @param {string} key 储存键值
+ *
+ * */
+function deleteExpiredDate(key) {
+	var indexTable = ls.getItem(expiredListTableKey);
+	if (!indexTable) return;
+
+	indexTable = JSON.parse(indexTable);
+	delete indexTable[key];
+
+	ls.setItem(expiredListTableKey, JSON.stringify(indexTable));
 }
 
 init();
