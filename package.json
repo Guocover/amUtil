@@ -16,7 +16,9 @@
 	},
 	"devDependencies": {
 		"gulp-util": "~2.2.14",
-		"gulp": "~3.5.2"
+		"gulp": "*",
+		"gulp-uglify": "*",
+		"gulp-concat": "*"
 	},
 	"keywords": [],
 	"licenses": "MIT"

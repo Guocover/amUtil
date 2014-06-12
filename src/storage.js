@@ -6,7 +6,7 @@
  * @version 1.0.0
  * */
 var storage = {},
-	ls ,
+	ls,
 	isStorable = true;
 
 /**
@@ -21,9 +21,8 @@ function init() {
 		console.info(e);
 		isStorable = false;
 	}
+	isStorable = false;
 }
-
-init();
 
 var methods = {
 	/**
@@ -77,8 +76,6 @@ var methods = {
 		ls.clear();
 	}
 };
-
-addMethod(methods);
 
 /**
  *
@@ -176,5 +173,62 @@ function addExpire(val, expire) {
 		return val;
 	}
 }
+
+init();
+addMethod(methods);
+
+///**
+// *
+// * 计算剩余的空间
+// *
+// * */
+//function calculateCapacity(count) {
+////	var testLength = [];
+////	testLength[5000000] = 0;
+////	var start = +new Date();
+////	var testVal = testLength.join();
+////	console.log("elapsedTime:", +new Date() - start);
+////	var testVal1 = testVal.slice(5000000);
+////
+////	console.log(testVal1.length);
+//	var testLength = [];
+//	testLength[2500000] = 0;
+//
+//	var trySet = function (val) {
+//		var isSetSuccess = false;
+//
+//		var start = +new Date();
+//		var tryVal = testLength.join();
+//		console.log("elapsedTime:", +new Date() - start);
+//		try {
+//			window.localStorage.setItem("am.tk", tryVal);
+//			isSetSuccess = true;
+//		} catch (e) {
+//			console.info(e);
+//			if (e.code == 22) {
+//				isSetSuccess = false;
+//			} else {
+//				isSetSuccess = undefined;
+//			}
+//		} finally {
+//			window.localStorage.removeItem("am.tk");
+//		}
+//
+//		return isSetSuccess;
+//	};
+//	var min = 0 , max = 2500000, current = parseInt((max - min) / 2), ret;
+//	for (var i = 0; i < count; i++) {
+////		console.log(current);
+//		ret = trySet(current);
+//		if (ret === false) {
+//			max = current;
+//		} else {
+//			min = current;
+//		}
+//		current = min + parseInt((max - min) / 2);
+//	}
+//	console.log(current);
+//}
+//window.calculateCapacity = calculateCapacity;
 
 module.exports = storage;

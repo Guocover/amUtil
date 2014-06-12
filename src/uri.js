@@ -30,6 +30,11 @@ var uri = {
 			relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
 			segments: a.pathname.replace(/^\//, '').split('/')
 		};
+		/**
+		*
+		* uri对象提供toString的方法，其内部调用stringify方法
+		*
+		* */
 		uriObj.toString = function () {
 			return uri.stringify(uriObj);
 		};
