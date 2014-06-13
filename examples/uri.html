@@ -22,58 +22,70 @@
             margin: 15px 0;
         }
 
+        #ret {
+            border: 1px solid #cccccc;
+            background: white;
+            border-radius: 3px;
+            padding: 3px;
+        }
+
     </style>
 </head>
 <body>
 <h3>uri</h3>
 
+<div id="ret"></div>
 <div id="tests"></div>
 
 <script type="text/javascript">
+    function showRet(content) {
+        document.querySelector("#ret").innerHTML = content;
+        console.log(content);
+    }
     var testUnits = [
         {
             name: "解析当前的url地址",
             command: function () {
-                console.log(AJ.uri.parse(location.href));
+                showRet(AJ.uri.parse(location.href));
             }
         },
         {
             name: "用stringify方法将uri转换成string",
             command: function () {
-                console.log(AJ.uri.stringify(AJ.uri.parse(location.href)));
+                showRet(AJ.uri.stringify(AJ.uri.parse(location.href)));
             }
         },
         {
             name: "用toString的方法将uri转换成string",
             command: function () {
                 var date = new Date((+new Date()) + 3000);
-                console.log(AJ.uri.parse(location.href).toString());
+                showRet(AJ.uri.parse(location.href).toString());
             }
         },
         {
             name: "当前地址增加 a=中文b 的参数",
             command: function () {
-                console.log(AJ.uri.setParam(location.href, "a", "中文b"));
+                showRet(AJ.uri.setParam(location.href, "a", "中文b"));
             }
         },
         {
             name: "获取a的参数",
             command: function () {
-                console.log(AJ.uri.getParam("http://www.alipay.com?a=中文&c=12", "a"));
+                showRet(AJ.uri.getParam("http://www.alipay.com?a=中文&c=12", "a"));
             }
         },
         {
             name: "删除a的参数",
             command: function () {
-                console.log(AJ.uri.removeParam("http://www.alipay.com?a=b&c=12", "a"));
+                showRet(AJ.uri.removeParam("http://www.alipay.com?a=b&c=12", "a"));
             }
         },
         {
             name: "格式化http://www.ailpay.com?a=中文&b=123 的参数",
             command: function () {
-                console.log(AJ.uri.format("http://www.alipay.com?a=中文&b=123"));
+                showRet(AJ.uri.format("http://www.alipay.com?a=中文&b=123"));
             }
-        },
+        }
     ];
 
     function createUnitLayout() {
