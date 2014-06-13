@@ -14,10 +14,10 @@ var uri = {
 	 * AJ.uri.parse(location.href);
 	 * */
 	parse: function (url) {
-		if (isObj(url))return url;
+		if (isUriObj(url))return url;
+
 		var a = document.createElement('a');
 		a.href = url;
-		//todo 在对象里增加特殊标志已判断是否是自己的对象
 		var uriObj = {
 			source: url,
 			protocol: a.protocol.replace(':', ''),
@@ -29,13 +29,14 @@ var uri = {
 			hash: a.hash.replace('#', ''),
 			path: a.pathname.replace(/^([^\/])/, '/$1'),
 			relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
-			segments: a.pathname.replace(/^\//, '').split('/')
+			segments: a.pathname.replace(/^\//, '').split('/'),
+			__type__: "uri"
 		};
 		/**
-		*
-		* uri对象提供toString的方法，其内部调用stringify方法
-		*
-		* */
+		 *
+		 * uri对象提供toString的方法，其内部调用stringify方法
+		 *
+		 * */
 		uriObj.toString = function () {
 			return uri.stringify(uriObj);
 		};
@@ -53,9 +54,9 @@ var uri = {
 	 * */
 	stringify: function (uri) {
 		var url = "";
-		url += uri.protocol + ":";
+		url += uri.protocol + "://";
 		url += uri.host + (uri.port ? (":" + uri.port) : "");
-		url += "//" + uri.path;
+		url += uri.path;
 		url += uri.query;
 		uri.hash && (url += "#" + uri.hash);
 		return url;
@@ -64,26 +65,22 @@ var uri = {
 	 *
 	 * 设置queryString的值
 	 * @param {!string|object} url url字符串或者是uri对象
-	 * @param {!string} key queryString的名字
-	 * @param {?string} value queryString的值，如果不传，或者传undefined|null 都认为是删除
+	 * @param {!string|object} name queryString的名字 如果是对象的话，则进行批量设置
+	 * @param {?string} value queryString的值
 	 *
 	 * @returns {string|object} 如果传入的参数是string，则返回string，否则返回uri对象
-	 * //todo 增加传对象的批量增加,removeParam 的api
+	 *
 	 * */
-	setParam: function (url, key, value) {
+	setParam: function (url, name, value) {
 		var uri = this.parse(url);
 
-		if (value === undefined || value === null) {
-			delete uri.params[key];
+		if (isObj(name)) {
+			for (var n in name) {
+				setQueryString(uri, n, name[n]);
+			}
 		} else {
-			uri.params[key] = value;
+			setQueryString(uri, name, value);
 		}
-		//重新构成uri.search
-		var search = [];
-		for (var paramName in uri.params) {
-			search.push(paramName + "=" + encodeURIComponent(uri.params[paramName]));
-		}
-		uri.query = "?" + search.join("&");
 
 		return isString(url) ? uri.toString() : uri;
 	},
@@ -97,6 +94,32 @@ var uri = {
 	getParam: function (url, name) {
 		var uri = this.parse(url);
 		return uri.params[name];
+	},
+	/**
+	 *
+	 * 删除param中的name
+	 * @param {string|object} url url字符串或者是uri对象
+	 * @param {string} name queryString 中的名字
+	 *
+	 * @returns {string|object}  如果传入的参数是string，则返回string，否则返回uri对象
+	 *
+	 * */
+	removeParam: function (url, name) {
+		var uri = isUriObj(url) ? url : this.parse(url);
+
+		uri = setQueryString(uri, name, null);
+
+		return isUriObj(url) ? uri : uri.toString();
+	},
+	/**
+	 *
+	 * 格式化url字符串，传入任何类型的url字符串，会自动转换成标准的url格式
+	 * @param {string} url 传入的url字符串
+	 * @returns {string}
+	 *
+	 * */
+	format: function (url) {
+		return this.parse(url).toString();
 	}
 };
 
@@ -115,6 +138,24 @@ function parseQueryString(search) {
 	return ret;
 }
 
+function setQueryString(uri, key, value) {
+	if (value === null) {
+		delete uri.params[key];
+	} else {
+		uri.params[key] = value;
+	}
+
+	//重新构成uri.search
+	var search = [];
+	for (var paramName in uri.params) {
+		//在设置name之前，会把value强制decode一次，防止传入的value已经被encode过而产生两次encode的问题
+		search.push(paramName + "=" + encodeURIComponent(decodeURIComponent(JSON.stringify(uri.params[paramName]))));
+	}
+	uri.query = "?" + search.join("&");
+
+	return uri;
+}
+
 function type(o) {
 	return Object.prototype.toString.call(o);
 }
@@ -125,6 +166,10 @@ function isString(o) {
 
 function isObj(o) {
 	return type(o) == '[object Object]';
+}
+
+function isUriObj(o) {
+	return isObj(o) && o.__type__ === "uri";
 }
 
 module.exports = uri;

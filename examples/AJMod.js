@@ -67,10 +67,10 @@
 		modSrcCode = modSrcCode.replace("module.exports", "window." + MOD_NAMESPACE + "." + modName);
 		var windowModuleCode = moduleWrapper.replace("$$modSrc", modSrcCode);
 
-		postModToServer(modName + ".windows", windowModuleCode);
-		document.write("<script type='text/javascript' src='" + "http://ux.alipay-inc.com/lib/getMod.php?modName=" + modName + ".windows" + "'></script>");
+//		postModToServer(modName + ".windows", windowModuleCode);
+//		document.write("<script type='text/javascript' src='" + "http://ux.alipay-inc.com/lib/getMod.php?modName=" + modName + ".windows" + "'></script>");
 
-//		document.write("<script type='text/javascript'>" + windowModuleCode + "</script>");
+		document.write("<script type='text/javascript'>" + windowModuleCode + "</script>");
 
 	}
 

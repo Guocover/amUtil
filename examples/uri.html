@@ -30,7 +30,6 @@
 <div id="tests"></div>
 
 <script type="text/javascript">
-    console.log(AJ.uri.stringify(AJ.uri.parse("http://www.alipay.com?a=1&b=%")));
     var testUnits = [
         {
             name: "解析当前的url地址",
@@ -52,15 +51,27 @@
             }
         },
         {
-            name: "当前地址增加a=b的参数",
+            name: "当前地址增加 a=中文b 的参数",
             command: function () {
-                console.log(AJ.uri.setQueryString(location.href,"a","中文b"));
+                console.log(AJ.uri.setParam(location.href, "a", "中文b"));
             }
         },
         {
             name: "获取a的参数",
             command: function () {
-                console.log(AJ.uri.getQueryString(location.href,"a"));
+                console.log(AJ.uri.getParam("http://www.alipay.com?a=中文&c=12", "a"));
+            }
+        },
+        {
+            name: "删除a的参数",
+            command: function () {
+                console.log(AJ.uri.removeParam("http://www.alipay.com?a=b&c=12", "a"));
+            }
+        },
+        {
+            name: "格式化http://www.ailpay.com?a=中文&b=123 的参数",
+            command: function () {
+                console.log(AJ.uri.format("http://www.alipay.com?a=中文&b=123"));
             }
         },
     ];
