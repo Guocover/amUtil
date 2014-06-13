@@ -1,4 +1,5 @@
 (function () {
+	//todo 参考combo连接符号
 	var MOD_NAMESPACE = "AJ";
 	eval("window." + MOD_NAMESPACE + " = window." + MOD_NAMESPACE + " || {}");
 

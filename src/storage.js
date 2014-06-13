@@ -84,7 +84,6 @@ methods = {
  * */
 function init() {
 	if ("localStorage" in window) {
-		// safari private browser mode will throw exception
 		try {
 			ls = window.localStorage;
 			ls.setItem("aj.storage.test.key", "");
@@ -92,6 +91,7 @@ function init() {
 			ls.removeItem("aj.storage.test.key");
 		} catch (e) {
 			console.info(e);
+			// safari private browser mode
 			if (e.code == 22 && ls.length === 0) {
 				isStorable = false;
 			}
@@ -216,8 +216,7 @@ function getExpiredDate(key) {
 		if (indexKey == key) {
 			//查询下如果key值在storage已经不存在，则删除此键值，并且返回undefined
 			if (!ls.getItem(key)) {
-				delete indexTable[key];
-				ls.setItem(expiredListTableKey, JSON.stringify(indexTable));
+				deleteExpiredDate(key);
 				return undefined;
 			} else {
 				return new Date(indexTable[key]);
@@ -231,7 +230,7 @@ function getExpiredDate(key) {
 /**
  *
  * 删除过期日期索引表中的key
- * @param {string} key 储存键值
+ * @param {!string} key 储存键值
  *
  * */
 function deleteExpiredDate(key) {
