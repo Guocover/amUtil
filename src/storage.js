@@ -86,9 +86,13 @@ function init() {
 	if ("localStorage" in window) {
 		try {
 			ls = window.localStorage;
-			ls.setItem("aj.storage.test.key", "");
-			isStorable = true;
-			ls.removeItem("aj.storage.test.key");
+			if (ls !== null) {
+				ls.setItem("aj.storage.test.key", "");
+				isStorable = true;
+				ls.removeItem("aj.storage.test.key");
+			} else {
+				isStorable = false;
+			}
 		} catch (e) {
 			console.info(e);
 			// safari private browser mode
