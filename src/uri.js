@@ -110,16 +110,6 @@ var uri = {
 		uri = setQueryString(uri, name, null);
 
 		return isUriObj(url) ? uri : uri.toString();
-	},
-	/**
-	 *
-	 * 格式化url字符串，传入任何类型的url字符串，会自动转换成标准的url格式
-	 * @param {string} url 传入的url字符串
-	 * @returns {string}
-	 *
-	 * */
-	format: function (url) {
-		return this.parse(url).toString();
 	}
 };
 
