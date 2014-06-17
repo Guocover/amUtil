@@ -1,6 +1,7 @@
 /**
  *
  * storage 本地存储
+ *
  * @memberof AJ
  * @author 轩与
  * @version 1.0.0
@@ -77,7 +78,7 @@ methods = {
 	}
 };
 
-/**
+/*
  *
  * storage模块初始化
  *
@@ -105,7 +106,7 @@ function init() {
 	}
 }
 
-/**
+/*
  *
  * 为storage对象增加方法，之所以采用方法来增加对象，是为了在此对象，横切入storage的方法来判断storage的可用性，不需要为每个方法都进行处理
  * @param {object} methods storage定义的方法 json对象，key为方法名，value为具体方法实现
@@ -120,7 +121,7 @@ function addMethod(methods) {
 	}
 }
 
-/**
+/*
  *
  * 根据过期标志来获取内容
  * @param {string} key 储存的名称
@@ -137,7 +138,7 @@ function getValueByExpire(key, storageValue) {
 	}
 }
 
-/**
+/*
  *
  * 设置storage的内部实现方法
  * @param {string} key 存储的key值
@@ -160,7 +161,7 @@ function setValue(key, val) {
 	}
 }
 
-/**
+/*
  *
  * 在过期索引表中增加此key的设置
  * @param {*} key 用户设置的key数值
@@ -184,7 +185,7 @@ function addExpire(key, expire) {
 	}
 }
 
-/**
+/*
  *
  * 判断是否过期，从index表中查找
  * @param {string} key 储存键值
@@ -205,7 +206,7 @@ function isExpired(key) {
 	return false;
 }
 
-/**
+/*
  *
  * 获取过期日期
  * @param {string} key 储存键值
@@ -231,7 +232,7 @@ function getExpiredDate(key) {
 	return undefined;
 }
 
-/**
+/*
  *
  * 删除过期日期索引表中的key
  * @param {!string} key 储存键值
