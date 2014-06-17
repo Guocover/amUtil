@@ -18,7 +18,8 @@
 		"gulp-util": "~2.2.14",
 		"gulp": "*",
 		"gulp-uglify": "*",
-		"gulp-concat": "*"
+		"gulp-concat": "*",
+		"gulp-am-transport": "~0.1.2"
 	},
 	"keywords": [],
 	"licenses": "MIT"
