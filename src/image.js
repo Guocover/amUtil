@@ -11,7 +11,7 @@ var image = {};
  * @desc image转换base64编码方法
  *
  * @example
- * AJ.image.image2base64("abc.jpg",function(base64Data){
+ * AJ.image.toBase64("abc.png",function(base64Data){
      *  //data:image/png;base64.....
      * })
  */
