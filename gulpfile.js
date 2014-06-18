@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat');
 
 gulp.task('am-transport', function () {
-	gulp.src('./src/*.js')
+	gulp.src('./src/**/*.js')
 		.pipe(amTransportGulp({uglify:true}))
 		.pipe(concat('aj.js'))
 		.pipe(gulp.dest('./dist/'));
