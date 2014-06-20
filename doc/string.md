@@ -27,5 +27,3 @@ string提供了计算字符串长度的方法
 	var string = AJ.string;
 	var length = string.getFullLen(str); //返回字符串str的长度
 ```
-
-### 演示 可选

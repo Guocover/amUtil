@@ -1,6 +1,20 @@
 ## image
 image提供了将图片文件转为base64编码的方法
 
+### 示例代码
+
+html
+```
+
+
+```
+js
+```
+
+```
+
+
+
 ### 接口列表
 
 ```
@@ -20,6 +34,7 @@ image提供了将图片文件转为base64编码的方法
 		 *  //data:image/png;base64.....
 		 * })
 	 */
+	 image.toBase64 = function (path, callback)
 
 ```
 
@@ -31,4 +46,3 @@ image提供了将图片文件转为base64编码的方法
 	})
 ```
 
-### 演示 可选

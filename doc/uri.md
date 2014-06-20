@@ -1,6 +1,16 @@
 ## uri
 uri提供了对url进行对象化以及提供了便捷的方法，更加容易对url进行queryString的操作
 
+
+### 示例代码
+js
+```
+	var uri = AJ.uri;
+	var url = uri.parse(location.href); //返回一个uri对象
+	uri.setParam(location.href,"name","value"); //返回当前的url并且在queryString上加上name=value的值
+```
+
+
 ### 接口列表
 
 ```
@@ -58,13 +68,3 @@ uri提供了对url进行对象化以及提供了便捷的方法，更加容易�
 	removeParam: function (url, name)
 
 ```
-
-### 示例代码
-
-```
-	var uri = AJ.uri;
-	var url = uri.parse(location.href); //返回一个uri对象
-	uri.setParam(location.href,"name","value"); //返回当前的url并且在queryString上加上name=value的值
-```
-
-### 演示 可选

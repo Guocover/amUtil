@@ -14,6 +14,11 @@ gulp.task('am-transport', function () {
 		.pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('doc', function () {
+	gulp.src('./doc/*.md')
+		.pipe(concat('aj-doc.md'))
+		.pipe(gulp.dest('./doc/build/'))
+});
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['am-transport']);
