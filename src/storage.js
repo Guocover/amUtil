@@ -121,6 +121,17 @@ function addMethod(methods) {
 	}
 }
 
+/*function addMethod(methods) {			//降低了复杂度  add by 丁兴华
+	if (isStorable){
+		for (var methodName in methods) {
+			storage[methodName] = methods[methodName];
+		}
+		//其实我觉得直接 storage = methods引用一下就可以了，遍历它意义不大又费时
+	}else{
+		console.warn('抱歉，您的浏览器暂不支持localstoarage的使用! 无法使用该接口!');
+	}
+}*/
+
 /*
  *
  * 根据过期标志来获取内容

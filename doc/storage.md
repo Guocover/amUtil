@@ -1,6 +1,18 @@
 ## storage
 storage提供了页面的数据存储的模式，采用了localstorage的机制进行数据存储
 
+
+### 示例代码
+js
+```
+	var storage = AJ.storage;
+	storage.set("key1","value1");
+	storage.get("key1"); //返回value1
+	storage.clear();	//清空所有键值
+	storage.getExpiredDate("key1")		//获取key1键值的过期时间
+```
+
+
 ### 接口列表
 
 ```
@@ -50,12 +62,3 @@ storage提供了页面的数据存储的模式，采用了localstorage的机制�
 	getExpiredDate: function (key)
 
 ```
-
-### 示例代码
-
-```
-	var storage = AJ.storage;
-	storage.set("key1","value1");
-	storage.get("key1"); //返回value1
-```
-

@@ -1,5 +1,14 @@
 ## string
-string提供了计算字符串长度的方法
+string提供了计算字符串长度的方法，中文算两个，英文算一个
+
+
+### 示例代码
+js
+```	
+	var str = "alipay";
+	var length = AJ.string.getFullLen(str); //返回字符串str的长度
+```
+
 
 ### 接口列表
 
@@ -19,11 +28,4 @@ string提供了计算字符串长度的方法
 	 */
 	string.getFullLen = function (str)
 
-```
-
-### 示例代码
-
-```	
-	var string = AJ.string;
-	var length = string.getFullLen(str); //返回字符串str的长度
 ```
