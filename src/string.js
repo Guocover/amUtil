@@ -17,7 +17,7 @@ var string = {};
  * @desc 计算字符串长度的方法
  *
  * @example
- * AJ.string.getStrLen($(this).val())
+ * AJ.string.getFullLen($(this).val())
  */
 string.getFullLen = function (str) {
 	var len = 0;

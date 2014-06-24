@@ -37,6 +37,11 @@
 </div>
 
 <script type="text/javascript">
+	function showRet(content) {
+		content = typeof content === "undefined" ? "undefined" : content;
+		content = (typeof content !== "string") ? JSON.stringify(content) : content;
+		$(this).parent().find(".ret").append(AJ.date.format(new Date(), "[yyyy-MM-dd hh:mm:ss]")).append(content).append("<br />");
+	}
     var testUnits = [
         {
             name: "yy-MM-dd",

@@ -77,12 +77,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    function showRet(content) {
-        $(this).parent().find(".ret").html(typeof content === "object" ? JSON.stringify(content) : content);
-    }
-    function clearRet(context){
-        $(context).parent().find(".ret").html("");
-    }
     var testUnits = [
         {
             name: "解析当前的url地址到uri对象",
