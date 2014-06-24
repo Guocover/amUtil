@@ -1,8 +1,10 @@
-function showRet(context) {
-	clearRet(context)
-	$(this).parent().find(".ret").append(AJ.date.format(new Date(),"[yyyy-MM-dd hh:mm:ss]")).append(typeof context === "object" ? JSON.stringify(context) : context).append("<br />");
+function showRet(content) {
+//	clearRet(this);
+	content = typeof content === "undefined" ? "undefined" : content;
+	content = (typeof content !== "string") ? JSON.stringify(content) : content;
+	$(this).parent().find(".ret").append(AJ.date.format(new Date(), "[yyyy-MM-dd hh:mm:ss]")).append(content).append("<br />");
 }
-function clearRet(context){
+function clearRet(context) {
 	$(context).parent().find(".ret").html("");
 }
 

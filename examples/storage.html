@@ -39,22 +39,6 @@
 </div>
 <script type="text/javascript">
     var testUnits = [
-
-
-        {
-            name: "清除key1缓存,通过remove方法",
-            command: function () {
-                AJ.storage.remove("key1");
-            }
-        },
-        {
-            name: "查询key1的过期日期",
-            command: function () {
-                console.log(AJ.storage.getExpiredDate("key1"));
-            }
-        }
-    ];
-    var testUnits = [
         {
             name: "清除所有缓存",
             code: "AJ.storage.clear()",
