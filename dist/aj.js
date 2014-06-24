@@ -91,7 +91,7 @@ var image = {};
  * @desc image转换base64编码方法
  *
  * @example
- * AJ.image.image2base64("abc.jpg",function(base64Data){
+ * AJ.image.toBase64("abc.png",function(base64Data){
      *  //data:image/png;base64.....
      * })
  */
@@ -247,6 +247,17 @@ function addMethod(methods) {
 		storage[methodName] = isStorable ? methods[methodName] : unSupportTip;
 	}
 }
+
+/*function addMethod(methods) {			//降低了复杂度  add by 丁兴华
+	if (isStorable){
+		for (var methodName in methods) {
+			storage[methodName] = methods[methodName];
+		}
+		//其实我觉得直接 storage = methods引用一下就可以了，遍历它意义不大又费时
+	}else{
+		console.warn('抱歉，您的浏览器暂不支持localstoarage的使用! 无法使用该接口!');
+	}
+}*/
 
 /*
  *
@@ -563,7 +574,7 @@ function setQueryString(uri, key, value) {
 	var search = [];
 	for (var paramName in uri.params) {
 		//在设置name之前，会把value强制decode一次，防止传入的value已经被encode过而产生两次encode的问题
-		search.push(paramName + "=" + encodeURIComponent(decodeURIComponent(JSON.stringify(uri.params[paramName]))));
+		search.push(paramName + "=" + encodeURIComponent(decodeURIComponent(uri.params[paramName])));
 	}
 	uri.query = "?" + search.join("&");
 

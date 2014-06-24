@@ -140,7 +140,7 @@ function setQueryString(uri, key, value) {
 	var search = [];
 	for (var paramName in uri.params) {
 		//在设置name之前，会把value强制decode一次，防止传入的value已经被encode过而产生两次encode的问题
-		search.push(paramName + "=" + encodeURIComponent(decodeURIComponent(JSON.stringify(uri.params[paramName]))));
+		search.push(paramName + "=" + encodeURIComponent(decodeURIComponent(uri.params[paramName])));
 	}
 	uri.query = "?" + search.join("&");
 
