@@ -19,7 +19,7 @@
          * 日期格式化方法
          *
          * @memberof AJ.date
-         * @param {!Date} date - 日期对象
+         * @param {?Date|Number} date - 日期对象（或时间戳）
          * @param {?String} formatter - 指定格式化格式
          *
          * @returns {String}
@@ -29,39 +29,51 @@
          * @example
          * var d = new Date();
          * var ds = AJ.date.format(d,'yy-MM-dd'); //2014-05-03
-         * var ds = AJ.date.format(d,'yy/M/d'); //2014/5/3
-         * var ds = AJ.date.format(d,'yy/MM/d hh:mm:ss'); //2014/5/3 18:31:24
+         * var ds = AJ.date.format('yy/M/d'); //2014/5/3（不传date，默认去当前)
+         * var ds = AJ.date.format(d.getTime(),'yy/M/d'); //2014/5/3（传入时间戳)
+         * var ds = AJ.date.format(d); //2014/5/3 18:31:24（不传formatter）
+         * var ds = AJ.date.format(); //2014/5/3 18:31:24（不传date和formatter）
          */
-        format: function (date, formatter) {
+        format: function () {
+            var date,formatter;
+            if(arguments.length===0){
+                date=new Date();
+                formatter='yyyy-MM-dd hh:mm:ss';
+            }else if(arguments.length===1){
+                if(typeof arguments[0]==='string'){
+                    date=new Date();
+                    formatter=arguments[0];
+                }else{
+                    date=arguments[0];
+                    if(typeof date==='number'){
+                        var tmpDate=new Date();
+                        tmpDate.setTime(date);
+                        date=tmpDate;
+                    }
+                    formatter='yyyy-MM-dd hh:mm:ss';
+                }
+            }else{
+                date=arguments[0];
+                formatter=arguments[1];
+            }
+            if(typeof date==='number'){
+                var tmpDate=new Date();
+                tmpDate.setTime(date);
+                date=tmpDate;
+            }
+            if(typeof arguments)
             var z = {
                 y: date.getFullYear(),
                 M: date.getMonth() + 1,
                 d: date.getDate(),
                 h: date.getHours(),
                 m: date.getMinutes(),
-                s: date.getSeconds(),
-                S: date.getMilliseconds(),
-                q: Math.floor((date.getMonth() + 3) / 3),
-                w: date.getDay()
+                s: date.getSeconds()
             };
-            return formatter.replace(/([yMdhmsqSw])+/g, function (v,t) {
+            return formatter.replace(/([yMdhms])+/g, function (v,t) {
                 switch(t){
                     case 'y':
                         return z[t].toString().slice(-v.length);
-                    case 'q':
-                    case 'S':
-                        return z[t];
-                    case 'w':
-                        var week = {
-                            '0' : '\u65e5',
-                            '1' : '\u4e00',
-                            '2' : '\u4e8c',
-                            '3' : '\u4e09',
-                            '4' : '\u56db',
-                            '5' : '\u4e94',
-                            '6' : '\u516d'
-                        };
-                        return week[z[t]];
                     default:
                         return ((v.length > 1 ? '0' : '') + z[t]).slice(-2);
                 }
