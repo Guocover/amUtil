@@ -30,7 +30,7 @@ image.toBase64 = function (path, callback) {
 			dataValue = eleCanvas.toDataURL();
 			eleCanvas = null;
 		} catch (e) {
-			console.warn(e);
+			console.error(e);
 			error = e;
 		}
 		callback(dataValue, error);

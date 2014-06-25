@@ -31,7 +31,7 @@ js
 	/**
 	 * 设置储存内容
 	 * @param {string} key 存储的key值，区分大小写
-	 * @param {*} val 设置的存储数值
+	 * @param {*} val 设置的存储数值，除了object对象会做JSON.stringify处理，其他皆会转成string类型
 	 * @param {?number|date} expire 过期时间,如果是date类型，则是过期日期，如果是number则是过几秒后过期 单位：秒
 	 *
 	 * @returns {undefined|object} 成功返回undefined，不成功，返回一个异常对象
@@ -62,3 +62,9 @@ js
 	getExpiredDate: function (key)
 
 ```
+
+### 规则说明
+1.  该storage设置的key值和原生的通用，不过要使用过期功能，则必须使用该组件。建议在代码中不要把该组件和原生混用，以便出现不符预期的情况
+2.  原生storage如果传入的value为object的时，会转成[object Object]，该组件会对object进行JSON.stringify处理，其他类型皆和原生storage处理一致
+3.  该组件的输出value为string，不会强制做JSON.parse，需要使用方根据事情情况，自行处理
+4.  该组件对于异常，键值不存在，storage不支持等情况，api的返回皆为undefined

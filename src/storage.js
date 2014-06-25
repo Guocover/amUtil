@@ -115,6 +115,7 @@ function init() {
 function addMethod(methods) {
 	var unSupportTip = function () {
 		console.warn('抱歉，您的浏览器暂不支持localstoarage的使用! 无法使用该接口!');
+		return undefined;
 	};
 	for (var methodName in methods) {
 		storage[methodName] = isStorable ? methods[methodName] : unSupportTip;

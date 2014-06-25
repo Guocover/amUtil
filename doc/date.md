@@ -1,7 +1,6 @@
 ## date
 date提供了获取当前时间戳和格式化指定日期的方法
 
-
 ### 示例代码
 js
 ```
@@ -10,7 +9,6 @@ js
 	var ds = date.format(d,'yy-MM-dd'); //2014-05-03
 	var dnow = date.now(); //返回当前时间戳，如：1403104207894
 ```
-
 
 ### 接口列表
 
@@ -21,7 +19,7 @@ js
 	 *
 	 * @memberof AJ.date
 	 * @param {!Date} date - 日期对象
-	 * @param {?String} formatter - 指定格式化格式
+	 * @param {?String} formatter - 指定格式化格式 格式说明 y代表年份，M代表月份，d代表天数，h代表时，m代表分，s代表秒
 	 *
 	 * @returns {String}
 	 *
