@@ -101,7 +101,7 @@ image.toBase64 = function (path, callback) {
 		img = new Image();
 
 	img.onload = function () {
-		var dataValue = "";
+		var dataValue = "", error;
 
 		eleCanvas.width = img.width;
 		eleCanvas.height = img.height;
@@ -111,8 +111,9 @@ image.toBase64 = function (path, callback) {
 			eleCanvas = null;
 		} catch (e) {
 			console.warn(e);
+			error = e;
 		}
-		callback(dataValue);
+		callback(dataValue, error);
 	};
 	img.onerror = function () {
 		alert("图片无法加载，请检查对应地址的图片是否存在");

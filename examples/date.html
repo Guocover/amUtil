@@ -54,6 +54,16 @@
             }
         },
         {
+            name: "yy-MM-dd11",
+            code: 'AJ.date.format(new Date(),"yy-MM-dd")',
+            command: function (context) {
+                showRet.call(context, AJ.date.format(new Date(),"yy-MM-dd"));
+            },
+            predict: function(){
+                return "当天的此格式日期"
+            }
+        },
+        {
             name: "yyyy-MM-dd",
             code: 'AJ.date.format(new Date(),"yyyy-MM-dd")',
             command: function (context) {

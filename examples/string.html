@@ -39,12 +39,12 @@
 <script type="text/javascript">
     var testUnits = [
         {
-            name: "取\"alipay\"字符串长度",
-            code: 'AJ.string.getFullLen("alipay")',
+            name: '取"alipay汉字"字符串长度',
+            code: 'AJ.string.getFullLen("alipay汉字")',
             command: function (context) {
-                showRet.call(context, AJ.string.getFullLen("alipay"));
+                showRet.call(context, AJ.string.getFullLen("alipay汉字"));
             },
-            predict: 6
+            predict: 10
         }
     ];
 
