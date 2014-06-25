@@ -4,7 +4,7 @@ var date = {
      *
      * @memberof AJ.date
      * @param {?Date|Number} date - 日期对象（或时间戳）
-     * @param {?String} formatter - 指定格式化格式
+     * @param {?String} formatter - 指定格式化格式 格式说明 y代表年份，M代表月份，d代表天数，h代表时，m代表分，s代表秒
      *
      * @returns {String}
      *
