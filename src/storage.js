@@ -122,17 +122,6 @@ function addMethod(methods) {
 	}
 }
 
-/*function addMethod(methods) {			//降低了复杂度  add by 丁兴华
-	if (isStorable){
-		for (var methodName in methods) {
-			storage[methodName] = methods[methodName];
-		}
-		//其实我觉得直接 storage = methods引用一下就可以了，遍历它意义不大又费时
-	}else{
-		console.warn('抱歉，您的浏览器暂不支持localstoarage的使用! 无法使用该接口!');
-	}
-}*/
-
 /*
  *
  * 根据过期标志来获取内容
@@ -202,6 +191,7 @@ function addExpire(key, expire) {
  * 判断是否过期，从index表中查找
  * @param {string} key 储存键值
  * @returns {boolean}
+ *
  * */
 function isExpired(key) {
 	var indexTable = ls.getItem(expiredListTableKey);
@@ -223,6 +213,7 @@ function isExpired(key) {
  * 获取过期日期
  * @param {string} key 储存键值
  * @returns {undefined|Date} 未查询到日期则返回undefined,否则为Date日期对象
+ *
  * */
 function getExpiredDate(key) {
 	var indexTable = ls.getItem(expiredListTableKey);

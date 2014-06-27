@@ -9,7 +9,7 @@
 var uri = {
 	/**
 	 * 解析url，将url解析成uri对象
-	 * @param {string} url url字符串,如果传入的是对象，这不做任何处理，返回
+	 * @param {string|object} url url字符串,如果传入的是uri对象，这不做任何处理，返回
 	 * @returns {object} uri对象
 	 * @example
 	 * AJ.uri.parse(location.href);

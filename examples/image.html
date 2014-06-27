@@ -45,7 +45,7 @@
             code: 'AJ.image.toBase64("node.png",function(base64Data){ showRet.call(context, base64Data);})',
             command: function (context) {
                 AJ.image.toBase64("node.png", function (base64Data, error) {
-                    showRet.call(context, error || base64Data);
+                    showRet.call(context, error || base64Data.substr(0,300));
                     if (!error) {
                         $(".base64img").attr("src", base64Data).show();
                     }
