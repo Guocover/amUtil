@@ -8,6 +8,8 @@ js
 	var uri = AJ.uri;
 	var url = uri.parse(location.href); //返回一个uri对象
 	uri.setParam(location.href,"name","value"); //返回当前的url并且在queryString上加上name=value的值
+
+	uri.getParam("http://www.alipay.com?a=b","a");//返回b
 ```
 
 
