@@ -5,6 +5,16 @@
  * @author 双十
  * @version 1.0.0
  *
+ * uri对象name value键值对照表
+ * source：源url
+ * protocol：协议名 http https file
+ * host：域名
+ * port：端口号
+ * query：query string数值
+ * params：query string 对象
+ * hast：hash数值
+ * path：路径
+ *
  * */
 var uri = {
 	/**
@@ -66,7 +76,7 @@ var uri = {
 	 *
 	 * 设置queryString的值
 	 * @param {!string|object} url url字符串或者是uri对象
-	 * @param {!string|object} name queryString的名字 如果是对象的话，则进行批量设置
+	 * @param {!string|object} name query string的名字 如果是对象的话，则进行批量设置
 	 * @param {?string} value queryString的值
 	 *
 	 * @returns {string|object} 如果传入的参数是string，则返回string，否则返回uri对象

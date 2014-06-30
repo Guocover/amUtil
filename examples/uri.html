@@ -72,6 +72,16 @@
             }
         },
         {
+            name: '当前地址批量增加的参数{a:"中文b"，name:"John",age:23}',
+            code: 'AJ.uri.setParam(location.href, "a", "中文b")',
+            command: function (context) {
+                showRet.call(context, AJ.uri.setParam(location.href, {a: "中文b", name: "John", age: 23}));
+            },
+            predict: function () {
+                return "生成url中 包含a=%E4%B8%AD%E6%96%87b&name=John&age=23";
+            }
+        },
+        {
             name: "当前地址增加 a=中文b 的参数,当前地址已包含a",
             code: 'AJ.uri.setParam("http://localhost:63342/amJS/examples/uri.html?a=%E4%B8%AD%E6%96%87b", "a", "bbb")',
             command: function (context) {
@@ -91,11 +101,11 @@
         },
         {
             name: "删除a的参数",
-            code:'AJ.uri.removeParam("http://www.alipay.com?a=%E4%B8%AD%E6%96%87bb&c=12", "a")',
+            code: 'AJ.uri.removeParam("http://www.alipay.com?a=%E4%B8%AD%E6%96%87bb&c=12", "a")',
             command: function (context) {
                 showRet.call(context, AJ.uri.removeParam("http://www.alipay.com?a=%E4%B8%AD%E6%96%87b&c=12", "a"));
             },
-            predict:'http://www.alipay.com?c=12'
+            predict: 'http://www.alipay.com?c=12'
         }
     ];
 
