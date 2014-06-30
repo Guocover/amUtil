@@ -70,6 +70,3 @@ js
 	removeParam: function (url, name)
 
 ```
-
-### 规则说明
-1.
