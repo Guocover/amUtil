@@ -12,8 +12,16 @@ js
 	uri.getParam("http://www.alipay.com?a=b","a");//返回b
 ```
 
-
 ### 接口列表
+#### uri对象
+ * source：源url
+ * protocol：协议名 http https file
+ * host：域名
+ * port：端口号
+ * query：query string数值
+ * params：query string 对象
+ * hast：hash数值
+ * path：路径
 
 ```
 	/**

@@ -1,15 +1,23 @@
+/**
+ *
+ * date 日期格式
+ *
+ * @memberof AJ
+ *
+ * @author 雷骏
+ * @version 1.0.0
+ *
+ * */
 var date = {
 	/**
 	 * 日期格式化方法
 	 *
-	 * @memberof AJ.date
 	 * @param {?Date|Number} date - 日期对象（或时间戳）
 	 * @param {?String} formatter - 指定格式化格式 格式说明 y代表年份，M代表月份，d代表天数，h代表时，m代表分，s代表秒
 	 *
 	 * @returns {String}
 	 *
 	 * @desc 日期格式化方法
-	 *
 	 * @example
 	 * var d = new Date();
 	 * var ds = AJ.date.format(d,'yy-MM-dd'); //2014-05-03
@@ -18,7 +26,6 @@ var date = {
 	 * var ds = AJ.date.format(d); //2014/5/3 18:31:24（不传formatter）
 	 * var ds = AJ.date.format(); //2014/5/3 18:31:24（不传date和formatter
 	 *
-	 * //todo 传入的类型是否要做强检测，对于不符合的类型，直接返回空，避免出现js错误
 	 */
 	format: function () {
 		var date, formatter;
@@ -68,7 +75,6 @@ var date = {
 	/**
 	 * 当前时间时间戳
 	 *
-	 * @memberof AJ.date
 	 *
 	 * @returns {Number}
 	 *
