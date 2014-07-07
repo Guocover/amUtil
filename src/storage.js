@@ -115,6 +115,7 @@ function init() {
 function addMethod(methods) {
 	var unSupportTip = function () {
 		console.warn('抱歉，您的浏览器暂不支持localstoarage的使用! 无法使用该接口!');
+		return undefined;
 	};
 	for (var methodName in methods) {
 		storage[methodName] = isStorable ? methods[methodName] : unSupportTip;
@@ -190,6 +191,7 @@ function addExpire(key, expire) {
  * 判断是否过期，从index表中查找
  * @param {string} key 储存键值
  * @returns {boolean}
+ *
  * */
 function isExpired(key) {
 	var indexTable = ls.getItem(expiredListTableKey);
@@ -211,6 +213,7 @@ function isExpired(key) {
  * 获取过期日期
  * @param {string} key 储存键值
  * @returns {undefined|Date} 未查询到日期则返回undefined,否则为Date日期对象
+ *
  * */
 function getExpiredDate(key) {
 	var indexTable = ls.getItem(expiredListTableKey);

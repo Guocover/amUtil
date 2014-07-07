@@ -5,11 +5,21 @@
  * @author 双十
  * @version 1.0.0
  *
+ * uri对象name value键值对照表
+ * source：源url
+ * protocol：协议名 http https file
+ * host：域名
+ * port：端口号
+ * query：query string数值
+ * params：query string 对象
+ * hast：hash数值
+ * path：路径
+ *
  * */
 var uri = {
 	/**
 	 * 解析url，将url解析成uri对象
-	 * @param {string} url url字符串,如果传入的是对象，这不做任何处理，返回
+	 * @param {string|object} url url字符串,如果传入的是uri对象，这不做任何处理，返回
 	 * @returns {object} uri对象
 	 * @example
 	 * AJ.uri.parse(location.href);
@@ -66,7 +76,7 @@ var uri = {
 	 *
 	 * 设置queryString的值
 	 * @param {!string|object} url url字符串或者是uri对象
-	 * @param {!string|object} name queryString的名字 如果是对象的话，则进行批量设置
+	 * @param {!string|object} name query string的名字 如果是对象的话，则进行批量设置
 	 * @param {?string} value queryString的值
 	 *
 	 * @returns {string|object} 如果传入的参数是string，则返回string，否则返回uri对象
@@ -140,7 +150,7 @@ function setQueryString(uri, key, value) {
 	var search = [];
 	for (var paramName in uri.params) {
 		//在设置name之前，会把value强制decode一次，防止传入的value已经被encode过而产生两次encode的问题
-		search.push(paramName + "=" + encodeURIComponent(decodeURIComponent(JSON.stringify(uri.params[paramName]))));
+		search.push(paramName + "=" + encodeURIComponent(decodeURIComponent(uri.params[paramName])));
 	}
 	uri.query = "?" + search.join("&");
 
