@@ -1,4 +1,4 @@
-# AMJ alipay mobile javascript kit
+# AMJ - alipay mobile javascript kit
 
 - pubdate: 2014-06-19
 
