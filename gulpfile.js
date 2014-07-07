@@ -9,6 +9,7 @@ gulp.task('build', function () {
 		.pipe(amTransportGulp())
 		.pipe(concat('aj.js'))
 		.pipe(gulp.dest('./dist/'))
+		.pipe(gulp.dest('./examples/lib'))
 		.pipe(uglify())
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(gulp.dest('./dist/'));
