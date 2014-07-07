@@ -48,3 +48,8 @@ js
 	now: function ()
 
 ```
+
+### Demo
+[Demo地址](../examples/date.html)
+
+二维码地址

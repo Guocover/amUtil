@@ -1,9 +1,9 @@
 body {
-    margin: 15px;
+    /*margin: 15px;*/
 }
 
 .contain {
-    margin: 15px 0 30px;
+    margin: 15px 15px 30px;
     border-bottom: 1px dashed #333;
     padding-bottom: 15px;
 }
