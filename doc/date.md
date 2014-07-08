@@ -3,16 +3,17 @@ date提供了获取当前时间戳和格式化指定日期的方法
 
 ### 示例代码
 js
-````javascript
+```javascript
 	var date = AJ.date;
 	var d = new Date();
 	var ds = date.format(d,'yy-MM-dd'); //2014-05-03
 	var dnow = date.now(); //返回当前时间戳，如：1403104207894
-````
+```
+
 
 ### 接口列表
 
-````javascript
+```javascript
 
 	/**
 	 * 日期格式化方法
@@ -47,7 +48,7 @@ js
 	 */
 	now: function ()
 
-````
+```
 
 ### Demo
 **二维码地址**
