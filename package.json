@@ -2,7 +2,7 @@
 	"name": "amj",
 	"version": "1.0.0",
 	"description": "alipay mobile js framework",
-	"homepage": "",
+	"homepage": "https://github.com/am-team/amJS",
 	"author": "semious",
 	"maintainers": [
 		"semious"
@@ -12,7 +12,7 @@
 		"url": "git://gitlab.alibaba-inc.com/alipay-mobile-framework/amj.git"
 	},
 	"bugs": {
-		"url": ""
+		"url": "https://github.com/am-team/amJS/issues"
 	},
 	"devDependencies": {
 		"gulp-util": "~2.2.14",
