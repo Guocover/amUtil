@@ -50,6 +50,10 @@ js
 ```
 
 ### Demo
-[Demo地址](../examples/date.html)
+**二维码地址**
 
-二维码地址
+![date demo 二维码](https://i.alipayobjects.com/i/localhost/png/201407/2zkAtpcKS7.png)
+
+`手机观看效果更好`
+
+查看[Demo](../examples/date.html)
