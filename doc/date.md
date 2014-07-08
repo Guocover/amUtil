@@ -3,6 +3,7 @@ date提供了获取当前时间戳和格式化指定日期的方法
 
 ### 示例代码
 js
+
 ```javascript
 	var date = AJ.date;
 	var d = new Date();
@@ -13,7 +14,7 @@ js
 
 ### 接口列表
 
-```javascript
+```
 
 	/**
 	 * 日期格式化方法
