@@ -16,3 +16,6 @@ UI组件通用视觉设计将交由AMUI解决，AMJ将关注于解决javasript�
 
 * **核心类** date、storage、image 等...
 * **扩展类** history、log 等...
+
+### 使用方式
+[点击此链接](http://am-team.github.io/amj/aj-doc.html)
