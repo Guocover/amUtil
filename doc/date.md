@@ -11,7 +11,6 @@ js
 	var dnow = date.now(); //返回当前时间戳，如：1403104207894
 ```
 
-
 ### 接口列表
 
 ```
@@ -48,7 +47,6 @@ js
 	 * var nowStamp= AJ.date.now();
 	 */
 	now: function ()
-
 ```
 
 ### Demo

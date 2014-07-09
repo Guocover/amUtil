@@ -4,7 +4,7 @@ storage提供了页面的数据存储的模式，采用了localstorage的机制�
 
 ### 示例代码
 js
-```
+```javascript
 	var storage = AJ.storage;
 	storage.set("key1","value1");
 	storage.get("key1"); //返回value1
@@ -15,7 +15,7 @@ js
 
 ### 接口列表
 
-```
+```javascript
 	/**
 	 *
 	 * 获取储存内容

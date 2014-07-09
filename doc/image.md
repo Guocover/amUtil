@@ -3,7 +3,7 @@ image提供了将图片文件转为base64编码的方法
 
 ### 示例代码
 js
-```
+```javascript
 	AJ.image.toBase64("abc.png",function(base64Data,error){
 		//返回值base64Data即为结果，如"data:image/png;base64....."，
 	})
@@ -11,7 +11,7 @@ js
 
 ### 接口列表
 
-```
+```javascript
 	/**
 	 * image转换base64编码方法
 	 *
