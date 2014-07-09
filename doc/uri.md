@@ -78,3 +78,12 @@ js
 	removeParam: function (url, name)
 
 ```
+
+### Demo
+**二维码地址**
+
+![uri demo 二维码](https://i.alipayobjects.com/i/ecmng/png/201407/30M4zmFqUZ.png)
+
+`手机观看效果更好`
+
+查看[Demo](../examples/uri.html)

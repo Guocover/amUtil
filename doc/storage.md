@@ -63,6 +63,16 @@ js
 
 ```
 
+### Demo
+**二维码地址**
+
+![storage demo 二维码](https://i.alipayobjects.com/i/ecmng/png/201407/30M1hg3eRT.png)
+
+`手机观看效果更好`
+
+查看[Demo](../examples/storage.html)
+
+
 ### 规则说明
 1.  该storage设置的key值和原生的通用，不过要使用过期功能，则必须使用该组件。建议在代码中不要把该组件和原生混用，以便出现不符预期的情况
 2.  原生storage如果传入的value为object的时，会转成[object Object]，该组件会对object进行JSON.stringify处理，其他类型皆和原生storage处理一致
