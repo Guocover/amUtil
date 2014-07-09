@@ -3,7 +3,7 @@ string提供了计算字符串长度的方法，中文算两个，英文算一�
 
 ### 示例代码
 js
-```	javascript
+```javascript
 	var str = "alipay";
 	var length = AJ.string.getFullLen(str); //返回字符串str的长度
 ```
