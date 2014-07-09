@@ -30,6 +30,16 @@ js
 
 ```
 
+### Demo
+**二维码地址**
+
+![图片转码测试 demo 二维码](https://i.alipayobjects.com/i/ecmng/png/201407/30Lzw1F4Q3.png)
+
+`手机观看效果更好`
+
+查看[Demo](../examples/image.html)
+
+
 ### 规则说明
 1. 不支持跨域图片的base64编码
 2、不支持file形式的图片base64编码
