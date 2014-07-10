@@ -78,3 +78,4 @@ js
 2.  原生storage如果传入的value为object的时，会转成[object Object]，该组件会对object进行JSON.stringify处理，其他类型皆和原生storage处理一致
 3.  该组件的输出value为string，不会强制做JSON.parse，需要使用方根据事情情况，自行处理
 4.  该组件对于异常，键值不存在，storage不支持等情况，api的返回皆为undefined
+

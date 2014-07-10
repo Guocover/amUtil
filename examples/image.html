@@ -37,19 +37,23 @@
         <h5>结果</h5>
         <h5>base64的图片</h5>
         <img class="base64img" style="display: none" alt=""/>
+
         <div class="ret"></div>
-        <a href="javascript:;" onclick="clearRet(this)" class="btn-clear">清除结果</a>
+        <a href="javascript:;" class="btn-clear">清除结果</a>
         <a href="javascript:;" onclick="$$command" class="am-button am-button-sm">运行</a>
     </div>
 </div>
 <script type="text/javascript">
+    $('.btn-clear').live("click", function () {
+        clearRet(this);
+    });
     var testUnits = [
         {
             name: "将node图片base64化",
             code: 'AJ.image.toBase64("node.png",function(base64Data){ showRet.call(context, base64Data);})',
             command: function (context) {
                 AJ.image.toBase64("node.png", function (base64Data, error) {
-                    showRet.call(context, error || base64Data.substr(0,300));
+                    showRet.call(context, error || base64Data.substr(0, 300));
                     if (!error) {
                         $(".base64img").attr("src", base64Data).show();
                     }
