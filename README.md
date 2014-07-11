@@ -1,5 +1,9 @@
-# AMJ alipay mobile javascript framework
+# 关于AMJ
+- pubdate: 2014-03-06
+- tags: 关于
+- author: 仈爪
 
+---
 ### 技术目标:
 
 在支付宝钱包的平台化路线上，大量的拥有 **短平快** （流程短、扁平化、快速开发）特征的业务需求不断涌现，对于开发平台更加如此
