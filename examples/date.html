@@ -78,6 +78,28 @@
             }
         },
         {
+            name: "yyyy-M-dd",
+            code: 'AJ.date.format(new Date("aaa"),"yyyy-M-dd")',
+            command: function (context) {
+//                var date = new Date("2014-12-24");
+                showRet.call(context, AJ.date.format(new Date("aaaa"),"yyyy-M-dd"));
+            },
+            predict: function(){
+                return "非法日期"
+            }
+        },
+        {
+            name: "yyyy-M-dd",
+            code: 'AJ.date.format(new Date("2014/6/30"),"yyyy-M-dd")',
+            command: function (context) {
+//                var date = new Date("2014-12-24");
+                showRet.call(context, AJ.date.format(new Date("2014/6/30"),"yyyy-M-dd"));
+            },
+            predict: function(){
+                return "2014-6-30的此格式日期"
+            }
+        },
+        {
             name: "yyyy/M/d hh:mm:ss",
             code: 'AJ.date.format(new Date(),"yyyy/M/d hh:mm:ss")',
             command: function (context) {

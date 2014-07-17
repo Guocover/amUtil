@@ -54,6 +54,9 @@ var date = {
 			tmpDate.setTime(date);
 			date = tmpDate;
 		}
+        if(date == 'Invalid Date'){
+            return 'Invalid Date';
+        }
 		if (typeof arguments)
 			var z = {
 				y: date.getFullYear(),
@@ -91,5 +94,4 @@ var date = {
 		}
 	}
 };
-
 module.exports = date;
