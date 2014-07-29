@@ -9,5 +9,5 @@
 }
 </style>
 ## 源代码
-https://github.com/am-team/amJS/tree/master/dist
+[AMJ源代码地址](https://github.com/am-team/amJS/tree/master/dist)
 
