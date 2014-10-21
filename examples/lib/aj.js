@@ -102,6 +102,37 @@ window.AJ.date = date;
 window.AJ = window.AJ||{};
 (function(){
 /**
+ * 计算字符串长度的方法，中文算两个，英文算一个，特殊字符不算
+ *
+ * @memberof AJ.string
+ * @param {!str} string - 需要计算长度的字符串
+ *
+ * @returns {int}
+ *
+ * @desc 计算字符串长度的方法
+ *
+ * @example
+ * AJ.string.getFullLen($(this).val())
+ */
+var getFullLen = function (str) {
+  var len = 0;
+
+  for (var i = 0; i < str.length; i++) {
+    var c = str.charCodeAt(i);
+    if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+      len++;
+    } else {
+      len += 2;
+    }
+  }
+  return len;
+};
+
+window.AJ.getFullLen = getFullLen;
+})();
+window.AJ = window.AJ||{};
+(function(){
+/**
  *
  * image 图片方法
  *
@@ -151,6 +182,91 @@ image.toBase64 = function (path, callback) {
 		alert("图片无法加载，请检查对应地址的图片是否存在");
 	};
 	img.src = path;
+};
+
+/**
+ * 第一期兼容srcset
+ *
+ * @desc 兼容w3c的srcset属性
+ *
+ * @example
+ * AJ.image.imageFill()
+ */
+ image.imageFill = function () {
+    imageFillOnce();
+    var intervalId = setInterval(function () {
+        imageFillOnce();
+        if (/^loaded|^i|^c/.test(document.readyState)) {
+            clearInterval(intervalId);
+            return;
+        }
+    }, 250);
+};
+/*
+*@param 通过srcset属性遍历到image的dom
+*/
+var getSrcSetAttr = function (_self) {
+    var srcSetAttr = _self.getAttribute("srcset");
+    var srcSetOption = srcSetAttr.split(",");
+    var srcSetPare = [];
+
+    //对属性内容进行格式化，最后拼成对象
+    if (/^.+,.+x$/.test(srcSetAttr)) {
+        for (var i = 0, len = srcSetOption.length; i < len; i++) {
+            var srcSetOptionVal;
+            var srcSetOptionParse = {};
+
+            //判断srcset的格式
+            if (/^.+\s.+x$/.test(srcSetOption[i])) {
+                srcSetOptionVal = srcSetOption[i].split(" ");
+                srcSetOptionParse.src = srcSetOptionVal[0];
+                srcSetOptionParse.dpi = srcSetOptionVal[1];
+                srcSetPare.push(srcSetOptionParse);
+            } else {
+                console.warn(srcSetOption[i] + ":srcset属性格式错误");
+            }
+        }
+    } else {
+        console.warn("srcset属性格式错误");
+    }
+
+    return srcSetPare;
+};
+/*
+*@param 经过格式化后的srcset属性值（包括dpi和对应src）
+*@param 当前screen的dpi值
+*@param 通过srcset属性遍历到image的dom
+*/
+var applySrcset = function(getSrcParsed,getDprX,_self){
+    if (getSrcParsed.length) {
+        for (var i = 0, len = getSrcParsed.length; i < len; i++) {
+            if(getSrcParsed[i].dpi === getDprX){
+                _self.src = getSrcParsed[i].src;
+            }
+        }
+    }
+};
+
+var imageFillOnce = function () {
+    var srcsetSupported = "srcset" in document.createElement("img");
+    var getDpr = window.devicePixelRatio || 1;
+
+	//判断是否支持srcset的属性
+    if (srcsetSupported === false) {
+        var eleSrcSet = document.querySelectorAll("img[srcset]");
+        var getSrcParsed;
+        var getDprX = getDpr + "x";
+
+        //遍历到拥有srcset属性的img节点，后进行判断dpi然后更换图片的操作
+        if (eleSrcSet.length) {
+            for(var i= 0,len = eleSrcSet.length;i<len;i++){
+                var _self = eleSrcSet[i];
+                getSrcParsed = getSrcSetAttr(_self);
+                applySrcset(getSrcParsed,getDprX,_self);
+            };
+        }
+    }
+    ;
 };
 
 window.AJ.image = image;
