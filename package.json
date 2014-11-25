@@ -1,7 +1,7 @@
 {
-	"name": "amj",
+	"name": "amutil",
 	"version": "1.0.0",
-	"description": "alipay mobile js framework",
+	"description": "alipay mobile js util ",
 	"homepage": "https://github.com/am-team/amJS",
 	"author": "semious",
 	"maintainers": [

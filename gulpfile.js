@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 gulp.task('build', function () {
 	gulp.src('./src/**/*.js')
 		.pipe(amTransportGulp())
-		.pipe(concat('aj.js'))
+		.pipe(concat('au.js'))
 		.pipe(gulp.dest('./examples/lib'))
 		.pipe(uglify())
 		.pipe(gulp.dest('./dist/'));

@@ -1,5 +1,5 @@
 (function () {
-	var MOD_NAMESPACE = "AJ";
+	var MOD_NAMESPACE = "AU";
 	eval("window." + MOD_NAMESPACE + " = window." + MOD_NAMESPACE + " || {}");
 
 	/**
