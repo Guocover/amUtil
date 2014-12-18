@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 
 gulp.task('build', function () {
 	gulp.src('./src/**/*.js')
-		.pipe(amTransportGulp())
+		.pipe(amTransportGulp({family:"AU"}))
 		.pipe(concat('au.js'))
 		.pipe(gulp.dest('./examples/lib'))
 		.pipe(uglify())
@@ -15,7 +15,7 @@ gulp.task('build', function () {
 
 gulp.task('doc', function () {
 	gulp.src('./doc/*.md')
-		.pipe(concat('aj-doc.md'))
+		.pipe(concat('au-doc.md'))
 		.pipe(gulp.dest('./doc/build/'))
 });
 

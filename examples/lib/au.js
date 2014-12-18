@@ -1,4 +1,4 @@
-window.AJ = window.AJ||{};
+window.AU = window.AU||{};
 (function(){
 /**
  *
@@ -96,10 +96,10 @@ var date = {
 		}
 	}
 };
-window.AJ.date = date;
+window.AU.date = date;
 
 })();
-window.AJ = window.AJ||{};
+window.AU = window.AU||{};
 (function(){
 /**
  * 计算字符串长度的方法，中文算两个，英文算一个，特殊字符不算
@@ -128,9 +128,9 @@ var getFullLen = function (str) {
   return len;
 };
 
-window.AJ.getFullLen = getFullLen;
+window.AU.getFullLen = getFullLen;
 })();
-window.AJ = window.AJ||{};
+window.AU = window.AU||{};
 (function(){
 /**
  *
@@ -269,9 +269,9 @@ var imageFillOnce = function () {
     ;
 };
 
-window.AJ.image = image;
+window.AU.image = image;
 })();
-window.AJ = window.AJ||{};
+window.AU = window.AU||{};
 (function(){
 /**
  *
@@ -529,9 +529,9 @@ function deleteExpiredDate(key) {
 init();
 addMethod(methods);
 
-window.AJ.storage = storage;
+window.AU.storage = storage;
 })();
-window.AJ = window.AJ||{};
+window.AU = window.AU||{};
 (function(){
 /**
  *
@@ -578,9 +578,9 @@ function isStr(o) {
 	return Object.prototype.toString.call(o) === "[object String]";
 }
 
-window.AJ.string = string;
+window.AU.string = string;
 })();
-window.AJ = window.AJ||{};
+window.AU = window.AU||{};
 (function(){
 /**
  *
@@ -757,5 +757,5 @@ function isUriObj(o) {
 	return isObj(o) && o.__type__ === "uri";
 }
 
-window.AJ.uri = uri;
+window.AU.uri = uri;
 })();
