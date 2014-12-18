@@ -5,7 +5,7 @@ storage提供了页面的数据存储的模式，采用了localstorage的机制�
 ### 示例代码
 js
 ```javascript
-	var storage = AJ.storage;
+	var storage = AU.storage;
 	storage.set("key1","value1");
 	storage.get("key1"); //返回value1
 	storage.clear();	//清空所有键值
@@ -23,7 +23,7 @@ js
 	 * @returns {string|undefined} 返回值为undefined没找到该内容
 	 *
 	 * @example
-	 * var content = AJ.storage.get("name");
+	 * var content = AU.storage.get("name");
 	 *
 	 * */
 	get: function (key)

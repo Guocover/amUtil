@@ -5,7 +5,7 @@ date提供了获取当前时间戳和格式化指定日期的方法
 js
 
 ```javascript
-	var date = AJ.date;
+	var date = AU.date;
 	var d = new Date();
 	var ds = date.format(d,'yy-MM-dd'); //2014-05-03
 	var dnow = date.now(); //返回当前时间戳，如：1403104207894
@@ -18,7 +18,7 @@ js
 	/**
 	 * 日期格式化方法
 	 *
-	 * @memberof AJ.date
+	 * @memberof AU.date
 	 * @param {!Date} date - 日期对象
 	 * @param {?String} formatter - 指定格式化格式 格式说明 y代表年份，M代表月份，d代表天数，h代表时，m代表分，s代表秒
 	 *
@@ -28,23 +28,23 @@ js
 	 *
 	 * @example
 	 * var d = new Date();
-	 * var ds = AJ.date.format(d,'yy-MM-dd'); //2014-05-03
-	 * var ds = AJ.date.format(d,'yy/M/d'); //2014/5/3
-	 * var ds = AJ.date.format(d,'yy/MM/d hh:mm:ss'); //2014/5/3 18:31:24
+	 * var ds = AU.date.format(d,'yy-MM-dd'); //2014-05-03
+	 * var ds = AU.date.format(d,'yy/M/d'); //2014/5/3
+	 * var ds = AU.date.format(d,'yy/MM/d hh:mm:ss'); //2014/5/3 18:31:24
 	 */
 	format: function (date, formatter)
 	
 	/**
 	 * 当前时间时间戳
 	 *
-	 * @memberof AJ.date
+	 * @memberof AU.date
 	 *
 	 * @returns {Number}
 	 *
 	 * @desc 当前时间时间戳
 	 *
 	 * @example
-	 * var nowStamp= AJ.date.now();
+	 * var nowStamp= AU.date.now();
 	 */
 	now: function ()
 ```

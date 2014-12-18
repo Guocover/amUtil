@@ -5,7 +5,7 @@ uri提供了对url进行对象化以及提供了便捷的方法，更加容易�
 ### 示例代码
 js
 ```javascript
-	var uri = AJ.uri;
+	var uri = AU.uri;
 	var url = uri.parse(location.href); //返回一个uri对象
 	uri.setParam(location.href,"name","value"); //返回当前的url并且在queryString上加上name=value的值
 
@@ -29,7 +29,7 @@ js
 	 * @param {string} url url字符串,如果传入的是对象，这不做任何处理，返回
 	 * @returns {object} uri对象
 	 * @example
-	 * AJ.uri.parse(location.href);
+	 * AU.uri.parse(location.href);
 	 * */
 	parse: function (url)
 
@@ -40,7 +40,7 @@ js
 	 * @returns {string}
 	 *
 	 * @example
-	 * console.log(AJ.uri.stringify(uri)); // http://www.alipay.com
+	 * console.log(AU.uri.stringify(uri)); // http://www.alipay.com
 	 *
 	 * */
 	stringify: function (uri)
